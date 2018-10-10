@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en-us">
+<div class="container">
     <head>
         <title>Word Guess Game</title>
         <meta charset="UTF-8">
+        <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/assets/css/reset.css">
         <link rel="stylesheet" href="/assets/css/style.css">
     </head>
-
     <!--Header/Navbar-->
     <header>
-        <h1>Video Game Word Guess</h1>
+        <h1>90's Video Games Word Guess</h1>
     </header>
 
     <!--Main Content-->
     <body>
-        <div class="container">
-            <p>Wins: <span id="numOfWins">-1</span></p>
-            <p>Current Word:</p>
-            <p id="currentWord">Press any key to get started!</p>
-            <p>Number of Guesses Remaining</p>
-            <p id="numOfGuesses">13</p>
-            <p>Letters Already Guessed</p>
-            <p id="guessedLetters">filler</p>
+        <div class="main_container">
+            <div class="content">     
+                <div id="game-image">
+                    <img src="assets/images/fallout.jpg" alt="Fallout Image">
+                    <p id="old-word">FALLOUT</p>
+                </div>
+                <div id="game-content">
+                    <p>Wins: <span id="numOfWins">-1</span></p>
+                    <p>Current Word:</p>
+                    <p id="currentWord">Press any key to get started!</p>
+                    <p>Number of Guesses Remaining</p>
+                    <p id="numOfGuesses">13</p>
+                    <p>Letters Already Guessed</p>
+                    <p id="guessedLetters">filler</p>  
+                </div>
+            </div>
         </div>
     </body>
 
@@ -29,5 +39,6 @@
     <footer>
 
     </footer>
+</div>
 <script src="assets/javascript/game.js"></script>
 </html>
