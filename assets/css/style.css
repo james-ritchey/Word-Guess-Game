@@ -147,7 +147,9 @@ button {
     }
 
     #mobile-keyboard {
-        display: inline;
+        display: block;
+        margin: auto;
+        margin-top: 0.25em;
     }
 
 }
@@ -187,10 +189,13 @@ button {
         float: none;
         display: block;
         width: auto;
-        max-width: 60%;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 1em;
+    }
+
+    #game-image img {
+        max-width: 60%;
     }
 
     .content {
@@ -205,6 +210,15 @@ button {
         font-size: 150%;
     }
 
+    #currentWord {
+        font-size: 75%;
+        word-wrap: break-word;
+    }
+
+    #old-word {
+        text-align: center;
+        font-size: 70%;
+    }
 
 
 }
