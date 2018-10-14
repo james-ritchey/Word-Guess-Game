@@ -113,7 +113,6 @@ button {
     font-family: 'Share Tech Mono', monospace !important;
     padding: 0.15em;
 }
-
 /** Media Queries **/
 /* Query for smaller desktop viewports (<=980px) */
 @media only screen and (max-width: 980px) {
@@ -219,7 +218,5 @@ button {
         text-align: center;
         font-size: 70%;
     }
-
-
 }
 
