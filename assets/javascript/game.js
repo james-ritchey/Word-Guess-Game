@@ -209,3 +209,10 @@ document.getElementById("start-button").onclick = function() {
 document.getElementById("retry-button").onclick = function() {
     game.reset();
 }
+
+document.getElementById("mobile-keyboard").oninput = function() {
+    if(game.inProgress){
+        game.guessLetter(document.getElementById("mobile-keyboard").value);
+    }
+    document.getElementById("mobile-keyboard").value = "";
+}
