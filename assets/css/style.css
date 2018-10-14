@@ -17,11 +17,24 @@ header {
     text-align: center;
     color: white;
     font-size: 150%;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P', cursive;    
+}
+
+#game-image p {
+    margin-top: 0.5em;
+}
+
+#retry-button {
+    display: none;
+}
+
+#currentWord {
+    font-family: 'Press Start 2P', cursive;    
 }
 
 #game-image img {
-    width: 100%;
+    max-width: 70%;
+    border: 2px solid white;
 }
 
 #game-content {
@@ -30,6 +43,7 @@ header {
     text-align: center;
     color: white;
     font-size: 125%;
+    font-family: 'Share Tech Mono', monospace;
 }
 
 #game-content p {
@@ -64,6 +78,26 @@ body {
 
 html {
     height: 100%;
+}
+
+h2 {
+    font-size: 125%;
+    margin-bottom: 1em;
+}
+
+#hidden-word {
+    display: none;
+}
+
+button {
+    font-size: 125%;
+    margin: 1em;
+    margin-top: 0;
+    font-family: 'Press Start 2P', cursive;
+    padding: 0.5em;
+    border: 3px solid white;
+    background: black;
+    color: white;
 }
 
 
@@ -124,11 +158,19 @@ html {
         margin-bottom: 0.25em;
     }
 
+    h2 {
+        margin-bottom: 0.25em;
+    }
+
+    #start-button {
+        margin-bottom: 0.25em;
+    }
+
     #game-image {
         float: none;
         display: block;
         width: auto;
-        max-width: 70%;
+        max-width: 60%;
         margin-left: auto;
         margin-right: auto;
         margin-bottom: 1em;
@@ -138,6 +180,12 @@ html {
         margin-left: auto;
         margin-right: auto;
         padding: 0 1em 0 1em;
+    }
+
+    header {
+        margin-top: 0.5em;
+        padding-bottom: 0.5em;
+        font-size: 150%;
     }
 
 }

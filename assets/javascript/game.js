@@ -1,10 +1,65 @@
+var fallout = {
+    name: "Fallout",
+    image: "assets/images/fallout.jpg",
+    sound: "assets/sounds/fallout.mp3"
+}
+
+var mkart = {
+    name: "Mario Kart",
+    image: "assets/images/mkart.jpg",
+    sound: "assets/sounds/mkart.mp3"
+}
+
+var halflife = {
+    name: "Half-Life",
+    image: "assets/images/halflife.jpg",
+    sound: "assets/sounds/halflife.mp3"
+}
+
+var bkazoo = {
+    name: "Banjo-Kazooie",
+    image: "assets/images/bkazoo.jpg",
+    sound: "assets/sounds/bkazoo.mp3"
+}
+
+var smarioworld = {
+    name: "Super Mario World",
+    image: "assets/images/smworld.jpg",
+    sound: "assets/sounds/smworld.mp3"
+}
+
+var geye = {
+    name: "Goldeneye",
+    image: "assets/images/geye.jpg",
+    sound: "assets/sounds/geye.mp3"
+}
+
+var bandicoot = {
+    name: "Crash Bandicoot",
+    image: "assets/images/bandicoot.jpg",
+    sound: "assets/sounds/bandicoot.mp3"
+}
+
+var doom = {
+    name: "DOOM",
+    image: "assets/images/doom.jpg",
+    sound: "assets/sounds/doom.mp3"
+}
+
+var rct = {
+    name: "Rollercoaster Tycoon",
+    image: "assets/images/rct.jpg",
+    sound: "assets/sounds/rct.mp3"
+}
+
 var game = {
     started: false,
     inProgress: false,
-    wordList: ["doom", "fallout", "half-life", "mario kart", "banjo-kazooie", "donkey kong country", "goldeneye", "super mario world"],
+    wordList: [fallout, mkart, halflife, bkazoo, smarioworld, geye, bandicoot, doom, rct],
     wordListReset: this.wordList,
     word: "filler",
     wordPick: -1,
+    wordObject: fallout,
     hiddenWord: "",
     minGuesses: 12,
     guesses: this.minGuesses,
@@ -14,11 +69,14 @@ var game = {
     numOfGuesses: document.getElementById("numOfGuesses"),
     numOfWins: document.getElementById("numOfWins"),
     guessedLetters: document.getElementById("guessedLetters"),
+    image: document.getElementById("image"),
+    oldWord: document.getElementById("old-word"),
 
     startGame: function() {
         //Initialize the game and the text elements on the page
         this.wordPick = Math.floor(Math.random() * this.wordList.length);
-        this.word = this.wordList[this.wordPick];
+        this.wordObject = this.wordList[this.wordPick];
+        this.word = this.wordObject.name.toLowerCase();
         for(var i = 0; i < this.word.length; i++){
             if("- ".includes(this.word.charAt(i))){
                 this.hiddenWord = this.hiddenWord + this.word.charAt(i);
@@ -31,6 +89,8 @@ var game = {
         if(this.guesses < this.minGuesses) {this.guesses = this.minGuesses};
         this.started = true;
         this.inProgress = true;
+        document.getElementById("hidden-word").style.display = "block";
+        document.getElementById("start-button").style.display = "none";
         this.updateInfo();
     },
 
@@ -39,12 +99,13 @@ var game = {
         this.hiddenWord = "";
         this.wordList.splice(this.wordPick, 1);
         if(this.wordList.length < 1) {
-            this.winGame()
+            this.endGame()
         }
         else{
             console.log(this.wordList);
             this.wordPick = Math.floor(Math.random() * this.wordList.length);
-            this.word = this.wordList[this.wordPick];
+            this.wordObject = this.wordList[this.wordPick];
+            this.word = this.wordObject.name.toLowerCase();
             for(var i = 0; i < this.word.length; i++){
                 if("- ".includes(this.word.charAt(i))){
                     this.hiddenWord = this.hiddenWord + this.word.charAt(i);
@@ -54,9 +115,8 @@ var game = {
                 }
             };
         };
-        this.wins++;
         this.guessList = [];
-        this.guesses = this.word.length + 2;
+        this.guesses = this.word.length;
         if(this.guesses < this.minGuesses) {this.guesses = this.minGuesses};
         this.updateInfo();
     },
@@ -79,7 +139,7 @@ var game = {
             this.guessList.push(key);
             this.guesses--;
             if(this.guesses == 0) {this.loseGame()};
-            if(this.hiddenWord == this.word) {this.newWord()};
+            if(this.hiddenWord == this.word) {this.winGame()};
             this.updateInfo();
         }
         else {
@@ -96,23 +156,30 @@ var game = {
     },
 
     winGame: function() {
-        this.hiddenWord = "WINNER!";
-        this.inProgress = false;
+        this.image.src = this.wordObject.image;
+        this.oldWord.textContent = this.wordObject.name;
+        this.newWord();
+        this.wins++;
         this.updateInfo();
-        console.log("Woah wow we won owwo");
     },
 
     loseGame: function() {
+        this.newWord();
+    },
+
+    endGame: function() {
         this.inProgress = false;
-        console.log("Game lost whoopps shrug");
+        document.getElementById("hidden-word").style.display = "none";
+        document.getElementById("retry-button").style.display = "inline";
     }
 }
 
 document.onkeyup = function(event) {
-    if(!(game.started)){
-        game.startGame();
-    }    
-    else if(game.inProgress){
+    if(game.inProgress){
         game.guessLetter(event.key);
     }
+}
+
+document.getElementById("start-button").onclick = function() {
+    game.startGame();
 }
