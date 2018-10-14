@@ -52,11 +52,17 @@ var rct = {
     sound: "assets/sounds/rct.mp3"
 }
 
+var mkombat = {
+    name: "Mortal Kombat",
+    image: "assets/images/mkombat.jpg",
+    sound: "assets/sounds/mkombat.mp3"
+}
+
 var game = {
     started: false,
     inProgress: false,
-    wordList: [fallout, mkart, halflife, bkazoo, smarioworld, geye, bandicoot, doom, rct],
-    wordListReset: this.wordList,
+    wordList: [fallout, mkart, halflife, bkazoo, smarioworld, geye, bandicoot, doom, rct, mkombat],
+    wordListReset: [fallout, mkart, halflife, bkazoo, smarioworld, geye, bandicoot, doom, rct, mkombat],
     word: "filler",
     wordPick: -1,
     wordObject: fallout,
@@ -71,6 +77,7 @@ var game = {
     guessedLetters: document.getElementById("guessedLetters"),
     image: document.getElementById("image"),
     oldWord: document.getElementById("old-word"),
+    audio: new Audio(),
 
     startGame: function() {
         //Initialize the game and the text elements on the page
@@ -155,9 +162,24 @@ var game = {
         guessedLetters.textContent = this.guessList;
     },
 
+    reset: function() {
+        for(var i = 0; i < this.wordListReset.length; i++){ this.wordList.push(this.wordListReset[i])}
+        this.numOfGuesses = 12;
+        this.numOfWins = 0;
+        this.guessList = [];
+        this.updateInfo();
+        document.getElementById("retry-button").style.display = "none";
+        document.getElementById("hidden-word").style.display = "inline";
+        this.startGame();
+    },
+
     winGame: function() {
         this.image.src = this.wordObject.image;
         this.oldWord.textContent = this.wordObject.name;
+        var tempAudio = new Audio(this.wordObject.sound);
+        this.audio.pause();
+        this.audio = tempAudio;
+        this.audio.play();
         this.newWord();
         this.wins++;
         this.updateInfo();
@@ -182,4 +204,8 @@ document.onkeyup = function(event) {
 
 document.getElementById("start-button").onclick = function() {
     game.startGame();
+}
+
+document.getElementById("retry-button").onclick = function() {
+    game.reset();
 }

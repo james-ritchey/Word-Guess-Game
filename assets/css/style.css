@@ -83,6 +83,7 @@ html {
 h2 {
     font-size: 125%;
     margin-bottom: 1em;
+    text-align: center;
 }
 
 #hidden-word {
