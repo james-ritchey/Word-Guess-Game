@@ -97,6 +97,8 @@ var game = {
     image: document.getElementById("image"),
     /*The HTML element of the previously guessed word, displayed under the image*/
     oldWord: document.getElementById("old-word"),
+    /*Audio element for the page*/
+    audio: new Audio(),
     /**
      * Initializes the game as well as the text elements on the page,
      * randomly generating a position on the array, setting the 
@@ -181,7 +183,7 @@ var game = {
             }
             this.guessList.push(key);
             this.guesses--;
-            if(this.guesses == 0) {this.loseGame()};
+            if(this.guesses == 0 && this.hiddenWord != this.word) {this.loseGame()};
             if(this.hiddenWord == this.word) {this.winGame()};
             this.updateInfo();
         }
