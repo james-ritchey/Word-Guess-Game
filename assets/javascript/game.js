@@ -212,7 +212,10 @@ document.getElementById("retry-button").onclick = function() {
 
 document.getElementById("mobile-keyboard").oninput = function() {
     if(game.inProgress){
-        game.guessLetter(document.getElementById("mobile-keyboard").value.toLowerCase());
+        var mkb = document.getElementById("mobile-keyboard");
+        var guess = mkb.value.charAt(mkb.length - 1).toLowerCase();
+        game.guessLetter(guess);
     }
+    console.log(guess);
     document.getElementById("mobile-keyboard").value = "";
 }
